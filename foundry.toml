@@ -3,5 +3,7 @@ src = "src"
 out = "out"
 libs = ["lib"]
 remappings = ["@openzepplin/contracts=lib/openzepplin-contracts/contracts"]
-
+ffi = true # try to make this false if you don't need to use the FFI
+# fs_permissions = [{ access = "read", path = "./broadcast" }]
+fs_permissions = [{ access = "read", path = "./img/" }]
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
