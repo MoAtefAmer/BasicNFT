@@ -20,7 +20,7 @@ contract DeployMoodNFT is Script {
 
     function svgToImageURI(
         string memory svg
-    ) public pure returns (string memory) {
+    ) public view returns (string memory) {
         string memory baseURL = "data:image/svg+xml;base64,";
         string memory svgBase64Encoded = Base64.encode(
             bytes(string(abi.encodePacked(svg)))
@@ -28,6 +28,7 @@ contract DeployMoodNFT is Script {
         string memory imageURI = string(
             abi.encodePacked(baseURL, svgBase64Encoded)
         );
+        console.log("imageURI", imageURI);
         return imageURI;
     }
 }

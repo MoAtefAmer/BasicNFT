@@ -1,6 +1,6 @@
 include .env
 
-.PHONY: all test clean deploy fund help install snapshot format anvil script
+.PHONY: all test clean deploy fund help install snapshot format anvil script deployMood
 
 DEFAULT_ANVIL_KEY := 0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d
 
@@ -31,7 +31,7 @@ DEFAULT_ANVIL_KEY := 0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6
 
 # format :; forge fmt
 
-# anvil :; anvil -m 'test test test test test test test test test test test junk' --steps-tracing --block-time 1
+anvil :; anvil -m 'test test test test test test test test test test test junk' --steps-tracing --block-time 1
 
 NETWORK_ARGS := --rpc-url http://localhost:8545 --private-key ${DEFAULT_ANVIL_KEY} --broadcast -vvv
 
@@ -63,3 +63,14 @@ test:;forge test  --match-test ${t} -vvv
 # devops:;forge install Cyfrin/foundry-devops --no-commit
 
 script:;forge script script/${s}
+
+deployMood:
+	@forge script script/DeployMoodNFT.s.sol:DeployMoodNFT $(NETWORK_ARGS)
+
+mintMoodNft:
+	@forge script script/Interactions.s.sol:MintMoodNft $(NETWORK_ARGS)
+
+flipMoodNft:
+	@forge script script/Interactions.s.sol:FlipMoodNft $(NETWORK_ARGS)
+
+	# mint NFT cast send 0x948B3c65b89DF0B4894ABE91E6D02FE579834F8F "mintNFT()" --private-key ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 --rpc-url http://localhost:8545
